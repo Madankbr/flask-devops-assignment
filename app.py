@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
 
@@ -13,6 +13,10 @@ def api():
         "course": "DevOps Assignment",
         "status": "active"
     })
+
+@app.route('/todo')
+def todo():
+    return render_template('todo.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
