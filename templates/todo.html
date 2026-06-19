@@ -7,6 +7,9 @@
 <body>
     <h1>Add a To-Do Item</h1>
     <form id="todoForm">
+        <label for="itemId">Item ID:</label><br>
+        <input type="text" id="itemId" name="itemId" required><br><br>
+
         <label for="itemName">Item Name:</label><br>
         <input type="text" id="itemName" name="itemName" required><br><br>
 
@@ -19,13 +22,14 @@
     <script>
         document.getElementById('todoForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            const itemId = document.getElementById('itemId').value;
             const itemName = document.getElementById('itemName').value;
             const itemDescription = document.getElementById('itemDescription').value;
 
             fetch('/submittodoitem', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ itemName, itemDescription })
+                body: JSON.stringify({ itemId, itemName, itemDescription })
             })
             .then(res => res.json())
             .then(data => alert('Item added: ' + JSON.stringify(data)))
